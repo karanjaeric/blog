@@ -37,11 +37,22 @@ public class PersonService {
             }
 
             Person person = new Person();
-            person.setDob(dob);
-            person.setEmail(email);
-            person.setFirstName(firstname);
-            person.setMobileNumber(mobileNumber);
-            person.setSurname(surname);
+            if (dob != null) {
+                person.setDob(dob);
+            }
+            if (email != null) {
+                person.setEmail(email);
+            }
+            if (firstname != null) {
+                person.setFirstName(firstname);
+            }
+            if (mobileNumber != null) {
+                person.setMobileNumber(mobileNumber);
+            }
+            if (surname != null) {
+                person.setSurname(surname);
+            }
+
             personDao.save(person);
             responseDto.setMessage("Person Saved Successfully");
             responseDto.setStatus(true);

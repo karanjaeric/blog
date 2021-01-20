@@ -10,6 +10,7 @@ import com.strathmore.blog.model.Person;
 import com.strathmore.blog.service.PersonService;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ekaranja
  */
 @RestController
-@RequestMapping("/blog")
 public class PersonController {
 
     @Autowired
     private PersonService personService;
 
-    @RequestMapping("/addPerson")
+    @GetMapping("/addPerson")
     public ResponseDto addPerson(
             @RequestParam(name = "surname") String surname,
-            @RequestParam(name = "firstName") String firstName,
+            @RequestParam(name = "firstname") String firstName,
             @RequestParam(name = "dob") LocalDate dob,
             @RequestParam(name = "email") String email,
             @RequestParam(name = "mobile_no") String mobileNumber
@@ -36,19 +36,19 @@ public class PersonController {
         return personService.addPerson(surname, firstName, dob, email, mobileNumber);
     }
 
-    @RequestMapping("/updatePerson")
+    @GetMapping("/updatePerson")
     public ResponseDto updatePerson(
             @RequestParam(name = "id") long id,
-            @RequestParam(name = "surname") String surname,
-            @RequestParam(name = "firstName") String firstName,
-            @RequestParam(name = "dob") LocalDate dob,
-            @RequestParam(name = "email") String email,
-            @RequestParam(name = "mobile_no") String mobileNumber
+            @RequestParam(name = "surname", required = false) String surname,
+            @RequestParam(name = "firstname", required = false) String firstName,
+            @RequestParam(name = "dob", required = false) LocalDate dob,
+            @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "mobile_no", required = false) String mobileNumber
     ) {
         return personService.updatePerson(id, surname, firstName, dob, email, mobileNumber);
     }
 
-    @RequestMapping("/getPerson")
+    @GetMapping("/getPerson")
     public Person getPerson(
             @RequestParam(name = "id") long id
     ) {
